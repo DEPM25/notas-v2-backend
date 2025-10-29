@@ -1,8 +1,10 @@
 FROM node:24-alpine AS builder
 
+RUN apk add --no-cache git
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
 WORKDIR /usr/src/app
+ENV PATH="/usr/src/app/node_modules/.bin:$PATH"
 
 COPY package.json pnpm-lock.yaml ./
 
